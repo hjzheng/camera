@@ -1,0 +1,44 @@
+appId: com.harry.app
+productName: camera
+asar: true
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+asarUnpack:
+  - resources/*
+afterSign: build/notarize.js
+win:
+  executableName: camera
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  hardenedRuntime: true
+  entitlements: "./build/entitlements.mac.plist"
+  entitlementsInherit: "./build/entitlements.mac.plist"
+  extendInfo:
+    NSCameraUsageDescription: "A subprocess requests access to the device's camera."
+    NSMicrophoneUsageDescription: "A subprocess requests access to the device's microphone."
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - AppImage
+    - snap
+    - deb
+  maintainer: electronjs.org
+  category: Utility
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish:
+  provider: generic
+  url: https://example.com/auto-updates
