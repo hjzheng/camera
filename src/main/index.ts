@@ -1,9 +1,10 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, systemPreferences } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { createTray } from './Tray'
 import { createContextMenu } from './ContextMenu'
+
 
 function createWindow(): void {
   // Create the browser window.
@@ -73,6 +74,9 @@ app.whenReady().then(() => {
 
   // 隐藏 dock 上的图标 
   app.dock.hide()
+
+  systemPreferences.askForMediaAccess('microphone');
+  systemPreferences.askForMediaAccess('camera');
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
