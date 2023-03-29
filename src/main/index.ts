@@ -52,9 +52,11 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
+  // await systemPreferences.askForMediaAccess('microphone')
+  await systemPreferences.askForMediaAccess('camera')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -74,9 +76,6 @@ app.whenReady().then(() => {
 
   // 隐藏 dock 上的图标 
   app.dock.hide()
-
-  systemPreferences.askForMediaAccess('microphone');
-  systemPreferences.askForMediaAccess('camera');
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
