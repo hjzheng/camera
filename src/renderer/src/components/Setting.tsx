@@ -7,6 +7,7 @@ import { SettingOutlined } from '@ant-design/icons'
 const Wrapper = styled.div`
   position: absolute;
   bottom: 10px;
+  z-index: 10;
 `
 interface IProps {
   value?: string
@@ -39,7 +40,7 @@ export function Setting({onChange}: IProps): JSX.Element {
       }}
       placement={'top'}
       >
-      <SettingOutlined style={{color: '#fff'}}/>
+      <SettingOutlined title={'设置'} style={{color: '#fff'}}/>
     </Dropdown>
   </Wrapper>
 }

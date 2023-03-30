@@ -1,9 +1,10 @@
-import { app, shell, BrowserWindow, ipcMain, systemPreferences, powerMonitor } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, systemPreferences, powerMonitor, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { createTray } from './Tray'
 import { createContextMenu } from './ContextMenu'
+import fs from 'fs'
 
 
 function createWindow(): void {
@@ -106,6 +107,32 @@ ipcMain.on('showContextMenu', (e) => {
   if (win) contextMenu.popup({ window: win})
 })
 
+ipcMain.on('showSaveFileDialog', async (e, fileData) => {
+  let win = BrowserWindow.fromWebContents(e.sender)
+  if (win) {
+    const { filePath } = await dialog.showSaveDialog(win, {
+      title: '保存文件', 
+      defaultPath: '~/Desktop/',
+      buttonLabel: '保存',
+      filters: [
+        { name: 'Img', extensions: ['png'] },
+      ]
+    })
+    if (filePath) {
+      const opt = {
+        flag: 'w', // a：追加写入；w：覆盖写入
+      }
+      const base64 = fileData.replace(/^data:image\/\w+;base64,/, "");
+      const dataBuffer = new Buffer(base64, 'base64');
+      fs.writeFile(filePath, dataBuffer, opt, (err) => {
+        if (err) {
+          console.error(err)
+        }
+      })
+    }
+  }
+})
+
 powerMonitor.on('suspend', () => {
   console.log('The system is going to sleep');
 });
@@ -115,3 +142,4 @@ powerMonitor.on('resume', () => {
   const apps = BrowserWindow.getAllWindows()
   if (apps[0]) apps[0].webContents.reload()
 });
+

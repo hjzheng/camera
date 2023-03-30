@@ -1,6 +1,7 @@
 import { useEffect, useState ,useRef } from 'react'
 import styled from 'styled-components'
 import { Setting } from './Setting'
+import { Screenshot } from './Screenshot'
 // import { useDrag } from '../utils/drag'
 // https://github.com/kapetan/electron-drag/blob/master/README.md
 import drag from 'electron-drag'
@@ -65,7 +66,9 @@ export function Camera(): JSX.Element {
    
   }, [deviceId, videoRef])
 
+
   return <Wrapper onMouseOver={() => setOver(true)} onMouseOut={() => setOver(false)} >
+    { over && <Screenshot htmlEle={videoRef.current as HTMLElement}/>}
     <video ref={videoRef}></video>
     { over && <Setting value={deviceId} onChange={setDeviceId}/>}
   </Wrapper>

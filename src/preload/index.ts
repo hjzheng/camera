@@ -8,7 +8,10 @@ const api = {
   },
   showContextMenu: () => {
     ipcRenderer.send('showContextMenu')
-  }
+  },
+  showSaveFileDialog: (fileData) => {
+    ipcRenderer.send('showSaveFileDialog', fileData)
+  },
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
