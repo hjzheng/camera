@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain, systemPreferences } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, systemPreferences, powerMonitor } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -105,3 +105,13 @@ ipcMain.on('showContextMenu', (e) => {
   const contextMenu = createContextMenu(win)
   if (win) contextMenu.popup({ window: win})
 })
+
+powerMonitor.on('suspend', () => {
+  console.log('The system is going to sleep');
+});
+
+powerMonitor.on('resume', () => {
+  console.log('The system is resuming');
+  const apps = BrowserWindow.getAllWindows()
+  if (apps[0]) apps[0].webContents.reload()
+});
