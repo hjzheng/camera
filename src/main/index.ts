@@ -112,11 +112,12 @@ ipcMain.on('showSaveFileDialog', async (e, fileData) => {
   if (win) {
     const { filePath } = await dialog.showSaveDialog(win, {
       title: '保存文件', 
-      defaultPath: '~/Desktop/',
+      defaultPath: '~/Desktop',
       buttonLabel: '保存',
       filters: [
         { name: 'Img', extensions: ['png'] },
-      ]
+      ],
+      properties: ['createDirectory']
     })
     if (filePath) {
       const opt = {
