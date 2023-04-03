@@ -51,7 +51,7 @@ const FILTERS = [
   },
   {
     label: 'combo',
-    value: 'contrast(1.4) saturate(1.8) sepia(.6)',
+    value: 'contrast(1.4) saturate(1.8) sepia(0.6)',
   }
 ]
 
