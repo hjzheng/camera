@@ -124,10 +124,18 @@ ipcMain.on('showSaveFileDialog', async (e, fileData) => {
         flag: 'w', // a：追加写入；w：覆盖写入
       }
       const base64 = fileData.replace(/^data:image\/\w+;base64,/, "");
-      const dataBuffer = new Buffer(base64, 'base64');
+      const dataBuffer = Buffer.from(base64, 'base64');
       fs.writeFile(filePath, dataBuffer, opt, (err) => {
         if (err) {
+          dialog.showErrorBox(`保存${filePath}失败`, err.message) 
           console.error(err)
+        } else {
+          dialog.showMessageBox(win as BrowserWindow, {
+            type: 'info',
+            title: '保存成功',
+            message: `保存${filePath}成功`,
+            buttons: ['确定']
+          })
         }
       })
     }
