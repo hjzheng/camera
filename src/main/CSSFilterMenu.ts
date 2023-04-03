@@ -1,4 +1,4 @@
-import { Menu, MenuItem } from "electron"
+import { Menu } from "electron"
 
 const FILTERS = [
   {
@@ -55,10 +55,10 @@ const FILTERS = [
   }
 ]
 
-const createCSSFilterMenu = (win, filterValue) => {
+const createCSSFilterMenu = (win: Electron.BrowserWindow | null, filterValue: string) => {
 
-  const click = (value) => {
-    win.webContents.send('setFilter', value)
+  const click = (value: string) => {
+    if (win) win.webContents.send('setFilter', value)
   }
 
   const filterMenuItems: any[] = FILTERS.map(f => {

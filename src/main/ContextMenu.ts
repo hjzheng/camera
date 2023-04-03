@@ -1,6 +1,6 @@
 import { Menu, shell } from "electron"
 
-const createContextMenu = (win) => {
+const createContextMenu = (win: Electron.BrowserWindow | null): Electron.Menu => {
 
   const contextMenu = Menu.buildFromTemplate([
     { label: '退出', role: 'quit' },
@@ -9,6 +9,7 @@ const createContextMenu = (win) => {
       shell.openExternal('https://github.com/hjzheng/camera')
     }},
     { label: 'dev', click: () => {
+      // @ts-ignore
       if (win) win.webContents.toggleDevTools({mode: 'detach'})
     }},
   ])

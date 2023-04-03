@@ -25,7 +25,6 @@ export const FilterSetting = ({videoEle}: IProps) => {
   }, [])
 
   const onClick = () => {
-    console.log(videoEle?.style?.filter)
     window.api.openFilterSettingMenu(videoEle?.style?.filter || 'none')
   }
 
