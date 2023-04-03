@@ -107,6 +107,10 @@ ipcMain.on('showContextMenu', (e) => {
   if (win) contextMenu.popup({ window: win})
 })
 
+ipcMain.on('openWebsite', async (e, url) => {
+  await shell.openExternal(url)
+})
+
 ipcMain.on('showSaveFileDialog', async (e, fileData) => {
   let win = BrowserWindow.fromWebContents(e.sender)
   if (win) {

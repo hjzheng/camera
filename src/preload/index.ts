@@ -12,6 +12,9 @@ const api = {
   showSaveFileDialog: (fileData) => {
     ipcRenderer.send('showSaveFileDialog', fileData)
   },
+  openWebsite: (url) => {
+    ipcRenderer.send('openWebsite', url)
+  }
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

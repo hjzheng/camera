@@ -2,6 +2,8 @@ import { useEffect, useState ,useRef } from 'react'
 import styled from 'styled-components'
 import { Setting } from './Setting'
 import { Screenshot } from './Screenshot'
+import { StyleSetting } from './StyleSetting'
+import { Website } from './Website'
 // import { useDrag } from '../utils/drag'
 // https://github.com/kapetan/electron-drag/blob/master/README.md
 import drag from 'electron-drag'
@@ -27,8 +29,11 @@ const Wrapper = styled.div`
 
 export function Camera(): JSX.Element {
   const videoRef: React.MutableRefObject<HTMLVideoElement|null> = useRef(null)
+  const wrapperRef: React.MutableRefObject<typeof Wrapper|null> = useRef(null)
+
   const [deviceId, setDeviceId] = useState('')
   const [over, setOver] = useState(false)
+  const [isCycle, setIsCycle] = useState(true)
 
   useEffect(() => {
     // const drag = useDrag()
@@ -66,10 +71,28 @@ export function Camera(): JSX.Element {
    
   }, [deviceId, videoRef])
 
+  const toggle = (isCycle: boolean) => {
+    if (isCycle) {
+      wrapperRef.current.style.borderRadius = '50%'
+    } else {
+      wrapperRef.current.style.borderRadius = '5%'
+    }
+    setIsCycle(isCycle)
+  }
 
-  return <Wrapper onMouseOver={() => setOver(true)} onMouseOut={() => setOver(false)} >
-    { over && <Screenshot htmlEle={videoRef.current}/>}
+  return <Wrapper 
+    ref={wrapperRef}
+    onMouseOver={() => setOver(true)} 
+    onMouseOut={() => setOver(false)} >
     <video ref={videoRef}></video>
-    { over && <Setting value={deviceId} onChange={setDeviceId}/>}
+    { 
+      over && 
+      <>
+        <Website />
+        <Screenshot htmlEle={videoRef.current}/>
+        <StyleSetting toggle={toggle} isCycle={isCycle}/>
+        <Setting value={deviceId} onChange={setDeviceId}/>
+      </> 
+    }
   </Wrapper>
 }
