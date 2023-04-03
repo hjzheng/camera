@@ -8,6 +8,8 @@ declare global {
       showContextMenu: () => void
       showSaveFileDialog: (fileData: any) => void,
       openWebsite: (url: string) => void
+      openFilterSettingMenu: (filterValue: string) => void
+      setFilter: (callback: (e, filterValue: string) => void) => void
     }
   }
 }

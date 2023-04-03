@@ -1,4 +1,4 @@
-import { Menu, Tray } from 'electron'
+import { Menu, Tray, shell, BrowserWindow } from 'electron'
 import path from 'path'
 
 const createTray = () => {
@@ -11,6 +11,15 @@ const createTray = () => {
 
   const contextMenu = Menu.buildFromTemplate([
     { label: '退出', role: 'quit' },
+    { label: '刷新', role: 'reload'},
+    { label: '源码', click: () => {
+      shell.openExternal('https://github.com/hjzheng/camera')
+    }},
+    { label: 'dev', click: () => {
+      const wins = BrowserWindow.getAllWindows()
+      // @ts-ignore
+      if (wins[0]) wins[0].webContents.toggleDevTools({mode: 'detach'})
+    }},
     // create reload menu item  
     // { label: '重新加载', role: 'reload' },
     // create toggle dev tools menu item

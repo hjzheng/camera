@@ -14,6 +14,12 @@ const api = {
   },
   openWebsite: (url) => {
     ipcRenderer.send('openWebsite', url)
+  },
+  openFilterSettingMenu: (value) => {
+    return ipcRenderer.send('openFilterSettingMenu', value)
+  },
+  setFilter: (callback) => {
+    ipcRenderer.on('setFilter', callback)
   }
 }
 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Setting } from './Setting'
 import { Screenshot } from './Screenshot'
 import { StyleSetting } from './StyleSetting'
-import { Website } from './Website'
+import { FilterSetting } from './FilterSetting'
 // import { useDrag } from '../utils/drag'
 // https://github.com/kapetan/electron-drag/blob/master/README.md
 import drag from 'electron-drag'
@@ -88,7 +88,7 @@ export function Camera(): JSX.Element {
     { 
       over && 
       <>
-        <Website />
+        <FilterSetting videoEle={videoRef.current} value="none"/>
         <Screenshot htmlEle={videoRef.current}/>
         <StyleSetting toggle={toggle} isCycle={isCycle}/>
         <Setting value={deviceId} onChange={setDeviceId}/>

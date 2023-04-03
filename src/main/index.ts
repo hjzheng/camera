@@ -4,6 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { createTray } from './Tray'
 import { createContextMenu } from './ContextMenu'
+import { createCSSFilterMenu } from './CSSFilterMenu'
 import fs from 'fs'
 
 
@@ -107,8 +108,14 @@ ipcMain.on('showContextMenu', (e) => {
   if (win) contextMenu.popup({ window: win})
 })
 
-ipcMain.on('openWebsite', async (e, url) => {
+ipcMain.on('openWebsite', async (_e, url) => {
   await shell.openExternal(url)
+})
+
+ipcMain.on('openFilterSettingMenu', async (e, filterValue) => {
+  let win = BrowserWindow.fromWebContents(e.sender)
+  const cssFilterMenu = createCSSFilterMenu(win, filterValue)
+  if (win) cssFilterMenu.popup({ window: win})
 })
 
 ipcMain.on('showSaveFileDialog', async (e, fileData) => {

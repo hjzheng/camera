@@ -39,9 +39,10 @@ export function Setting({onChange}: IProps): JSX.Element {
         items,
         onClick: (e) => onChange(e.key),
       }}
+      trigger={['click']}
       placement={'top'}
       >
-      <SettingOutlined title={'设置'} style={{color: '#fff'}}/>
+      <SettingOutlined title={'切换摄像头'} style={{color: '#fff'}}/>
     </Dropdown>
   </Wrapper>
 }
