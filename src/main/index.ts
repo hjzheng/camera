@@ -118,24 +118,35 @@ ipcMain.on('openFilterSettingMenu', async (e, filterValue) => {
   if (win) cssFilterMenu.popup({ window: win})
 })
 
-ipcMain.on('showSaveFileDialog', async (e, fileData) => {
+ipcMain.on('showSaveFileDialog', async (e, fileData, fileType) => {
   let win = BrowserWindow.fromWebContents(e.sender)
   if (win) {
+    let filters = [] as any[] 
+    if (fileType === 'image/png') filters.push({ name: 'image', extensions: ['png']})
+    if (fileType === 'video/webm') filters.push({ name: 'video', extensions: ['webm']})
+    
     const { filePath } = await dialog.showSaveDialog(win, {
       title: '保存文件', 
       defaultPath: '~/Desktop',
       buttonLabel: '保存',
-      filters: [
-        { name: 'Img', extensions: ['png'] },
-      ],
+      filters,
       properties: ['createDirectory']
     })
+
+    // nodejs save blob file
+
     if (filePath) {
       const opt = {
         flag: 'w', // a：追加写入；w：覆盖写入
       }
-      const base64 = fileData.replace(/^data:image\/\w+;base64,/, "");
-      const dataBuffer = Buffer.from(base64, 'base64');
+
+      let dataBuffer = Buffer.from(fileData, 'binary');
+
+      if (fileType === 'image/png') {
+        const base64 = fileData.replace(/^data:image\/\w+;base64,/, "");
+        dataBuffer = Buffer.from(base64, 'base64');
+      }
+      
       fs.writeFile(filePath, dataBuffer, opt, (err) => {
         if (err) {
           dialog.showErrorBox(`保存${filePath}失败`, err.message) 

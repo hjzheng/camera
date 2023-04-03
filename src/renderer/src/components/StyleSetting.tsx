@@ -5,7 +5,8 @@ import { BorderOutlined, CheckCircleOutlined } from '@ant-design/icons'
 const Wrapper = styled.div`
   position: absolute;
   right: 10px;
-  top: calc(50% - 16px);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
   cursor: pointer;
 `

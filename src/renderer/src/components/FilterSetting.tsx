@@ -6,7 +6,8 @@ import { useEffect } from 'react';
 const Wrapper = styled.div`
   position: absolute;
   left: 10px;
-  top: calc(50% - 16px);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
   cursor: pointer;
 `

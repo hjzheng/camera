@@ -9,8 +9,8 @@ const api = {
   showContextMenu: () => {
     ipcRenderer.send('showContextMenu')
   },
-  showSaveFileDialog: (fileData) => {
-    ipcRenderer.send('showSaveFileDialog', fileData)
+  showSaveFileDialog: (fileData, fileType) => {
+    ipcRenderer.send('showSaveFileDialog', fileData, fileType)
   },
   openWebsite: (url) => {
     ipcRenderer.send('openWebsite', url)

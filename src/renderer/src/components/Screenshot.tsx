@@ -17,7 +17,7 @@ export function Screenshot({htmlEle, onClick}: IProps): JSX.Element {
 
   const screenShort = () => {
     html2canvas(htmlEle || document.body).then(function(canvas) {
-      window.api.showSaveFileDialog(canvas.toDataURL()) 
+      window.api.showSaveFileDialog(canvas.toDataURL(), 'image/png') 
     })
     onClick && onClick()
   }
