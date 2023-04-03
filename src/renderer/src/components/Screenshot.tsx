@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   z-index: 10;
 `
 interface IProps {
-  htmlEle?: HTMLElement
+  htmlEle?: HTMLElement | null | undefined
   onClick?: () => void
 }
 

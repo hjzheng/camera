@@ -68,7 +68,7 @@ export function Camera(): JSX.Element {
 
 
   return <Wrapper onMouseOver={() => setOver(true)} onMouseOut={() => setOver(false)} >
-    { over && <Screenshot htmlEle={videoRef.current as HTMLElement}/>}
+    { over && <Screenshot htmlEle={videoRef.current}/>}
     <video ref={videoRef}></video>
     { over && <Setting value={deviceId} onChange={setDeviceId}/>}
   </Wrapper>

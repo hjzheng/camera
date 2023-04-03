@@ -8,7 +8,6 @@ function App(): JSX.Element {
 
     const callback = (e) => {
       e.preventDefault()
-      // @ts-ignore
       window.api.showContextMenu()
     }
 

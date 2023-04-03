@@ -11,6 +11,12 @@ const createTray = () => {
 
   const contextMenu = Menu.buildFromTemplate([
     { label: '退出', role: 'quit' },
+    // create reload menu item  
+    // { label: '重新加载', role: 'reload' },
+    // create toggle dev tools menu item
+    // { label: '切换开发者工具', role: 'toggleDevTools' },
+    // create toggle fullscreen menu item
+    // { label: '切换全屏', role: 'togglefullscreen' },
   ])
 
   appIcon.setToolTip('摄像头')

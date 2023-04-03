@@ -6,7 +6,7 @@ const createContextMenu = (win) => {
     { label: '退出', role: 'quit' },
     { label: '刷新', role: 'reload'},
     { label: 'dev', click: () => {
-      if (win) win.webContents.openDevTools({mode: 'detach'})
+      if (win) win.webContents.toggleDevTools({mode: 'detach'})
     }},
   ])
   

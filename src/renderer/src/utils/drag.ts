@@ -12,7 +12,7 @@ class Drag {
     if (this.isDrag) {
       let dx = Math.round(this.pageX - e.pageX)
       let dy = Math.round(this.pageY - e.pageY)
-      // @ts-ignore
+
       window.api.drag({x: dx, y: dy})
     }
   }
