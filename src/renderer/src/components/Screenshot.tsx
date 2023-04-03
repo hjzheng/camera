@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   position: absolute;
   top: 10px;
   z-index: 10;
+  cursor: pointer;
 `
 interface IProps {
   htmlEle?: HTMLElement | null | undefined

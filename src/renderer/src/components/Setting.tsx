@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   position: absolute;
   bottom: 10px;
   z-index: 10;
+  cursor: pointer;
 `
 interface IProps {
   value?: string
@@ -16,7 +17,7 @@ interface IProps {
 
 export function Setting({onChange}: IProps): JSX.Element {
 
-  const [ cameras, setCameras] = useState([] as MediaDeviceInfo[])
+  const [ cameras, setCameras ] = useState([] as MediaDeviceInfo[])
 
   useEffect(() => {
     (async () => {
