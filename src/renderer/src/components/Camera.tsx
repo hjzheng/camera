@@ -108,6 +108,7 @@ export function Camera(): JSX.Element {
   const stop = async () => {
     intervalRef.current && clearInterval(intervalRef.current)
     setIsRecoding(false)
+    setTime(0)
   }
 
   return <Wrapper 

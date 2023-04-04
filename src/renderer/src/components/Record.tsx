@@ -29,12 +29,13 @@ export const Record = ({videoEle, deviceId, onPlay, onStop, isPlaying, style}: I
     try {
       onPlay && onPlay()
 
-      let stream = await navigator.mediaDevices.getUserMedia({video: {deviceId}, audio: true})
+      let stream = await navigator.mediaDevices.getUserMedia({video: {deviceId}, audio: false})
 
       let video = videoEle
       
       if (video) {
           video.srcObject = stream
+          video.muted = true
           video.play()
       }
     
