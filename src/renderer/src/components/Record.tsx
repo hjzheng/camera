@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import styled from 'styled-components'
 import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons' 
+// https://github.com/muaz-khan/RecordRTC
 import { RecordRTCPromisesHandler } from 'recordrtc'
-import { sleep } from '../utils/tools';
+import { sleep } from '@renderer/utils/tools';
 
 const Wrapper = styled.div`
   position: absolute;

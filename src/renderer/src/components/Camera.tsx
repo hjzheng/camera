@@ -5,7 +5,7 @@ import { Screenshot } from './Screenshot'
 import { StyleSetting } from './StyleSetting'
 import { FilterSetting } from './FilterSetting'
 import { Record } from './Record'
-import { formatTime } from '../utils/tools'
+import { formatTime } from '@renderer/utils/tools'
 // import { useDrag } from '../utils/drag'
 // https://github.com/kapetan/electron-drag/blob/master/README.md
 import drag from 'electron-drag'
